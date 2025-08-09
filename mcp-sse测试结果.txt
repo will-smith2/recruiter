@@ -1,0 +1,253 @@
+🎯 MCP SSE 客户端演示
+==================================================
+
+🔗 测试服务器: wuying_mcp_server
+🚀 连接到 SSE MCP 服务器: https://agentbay.wuying.aliyuncs.com/sse?APIKEY=akm-9f50aa3e-3d9f-4b69-8219-f72d6eefdae7&IMAGEID=browser_latest
+2025-08-09 13:04:22,602 - INFO - 初始化 MCP 连接...
+2025-08-09 13:04:22,602 - INFO - 连接到 SSE 端点: https://agentbay.wuying.aliyuncs.com/sse?APIKEY=akm-9f50aa3e-3d9f-4b69-8219-f72d6eefdae7&IMAGEID=browser_latest
+2025-08-09 13:04:22,811 - INFO - SSE 连接建立成功
+2025-08-09 13:04:22,812 - INFO - 收到回调地址，新的请求地址为: https://agentbay.wuying.aliyuncs.com/message?sessionId=6a85dd9b-bcd1-4563-8648-70c2fc544499
+2025-08-09 13:04:22,812 - INFO - 回调地址已就绪，发送初始化请求...
+2025-08-09 13:04:22,812 - INFO - 发送请求: initialize
+2025-08-09 13:04:23,025 - INFO - MCP 连接初始化成功
+2025-08-09 13:04:23,025 - INFO - 获取工具列表...
+2025-08-09 13:04:23,027 - INFO - 发送请求: tools/list
+✅ 连接成功! 服务器信息:
+   名称: Wuying-mcp
+   版本: 0.1
+2025-08-09 13:04:23,598 - INFO - 找到 41 个工具
+2025-08-09 13:04:23,599 - INFO - 获取资源列表...
+2025-08-09 13:04:23,600 - INFO - 发送请求: resources/list
+
+🔧 找到 41 个可用工具:
+============================================================
+
+1. 工具名称: get_resource
+   描述: The command to retrieve  a wuying mcp runtime URL when user wants to get access to this runtime. Each retrieved URL will expire after a single use
+   参数:
+
+2. 工具名称: system_screenshot
+   描述: Captures a full-screen screenshot of the current display and returns a shareable URL. The screenshot is automatically processed and stored securely. The generated URL will expire after 64 minutes for security purposes.
+   参数:
+
+3. 工具名称: release_resource
+   描述: release resource when task finished
+   参数:
+
+4. 工具名称: startChromeByCdp
+   描述: Start the Chrome browser and create a CPD protocol websocket port for external debugging. The return value is the listening port.
+   参数:
+
+5. 工具名称: stopChrome
+   描述: Stop the Chrome browser
+   参数:
+
+6. 工具名称: add
+   描述: This is a test method
+   参数:
+     - a (必需): number - 无描述
+     - b (必需): number - 无描述
+
+7. 工具名称: create_directory
+   描述: Create a new directory or ensure a directory exists. Can create multiple nested directories in one operation. If the directory already exists, this operation will succeed silently. Perfect for setting up directory structures for projects or ensuring required paths exist. Only works within allowed directories.
+   参数:
+     - path (必需): string - Directory path to create.
+
+8. 工具名称: edit_file
+   描述: Make line-based edits to a text file. Each edit replaces exact line sequences with new content. Returns a git-style diff showing the changes made. Only works within allowed directories.
+   参数:
+     - path (必需): string - File path to edit.
+     - dryRun (可选): boolean - Preview changes using git-style diff format
+     - edits (必需): array - 无描述
+
+9. 工具名称: get_file_info
+   描述: Retrieve detailed metadata about a file or directory. Returns comprehensive information including size, creation time, last modified time, permissions, and type. This tool is perfect for understanding file characteristics without reading the actual content. Only works within allowed directories.
+   参数:
+     - path (必需): string - File or directory path to inspect.
+
+10. 工具名称: read_file
+   描述: Read the contents of a file from the file system. You can specify an optional 'offset' (in bytes) to start reading from a specific position, and an optional 'length' (in bytes) to limit how many bytes to read. If 'length' is omitted or 0, the file will be read to the end. Handles various text encodings and provides detailed error messages if the file cannot be read. Only works within allowed directories.
+   参数:
+     - path (必需): string - File path to read.
+     - offset (可选): integer - Start reading from this byte offset.
+     - length (可选): integer - Number of bytes to read. If omitted or 0, read to end of file.
+
+11. 工具名称: read_multiple_files
+   描述: Read the contents of multiple files simultaneously. This is more efficient than reading files one by one when you need to analyze or compare multiple files. Each file's content is returned with its path as a reference. Failed reads for individual files won't stop the entire operation. Only works within allowed directories.
+   参数:
+     - paths (必需): array - Array of file paths to read.
+
+12. 工具名称: list_directory
+   描述: Get a detailed listing of all files and directories in a specified path. Results clearly distinguish between files and directories with [FILE] and [DIR] prefixes. This tool is essential for understanding directory structure and finding specific files within a directory. Only works within allowed directories.
+   参数:
+     - path (必需): string - Directory path to list.
+
+13. 工具名称: move_file
+   描述: Move or rename files and directories. Can move files between directories and rename them in a single operation. If the destination exists, the operation will fail. Works across different directories and can be used for simple renaming within the same directory. Both source and destination must be within allowed directories.
+   参数:
+     - destination (必需): string - Destination file or directory path.
+     - source (必需): string - Source file or directory path.
+
+14. 工具名称: search_files
+   描述: Recursively search for files and directories matching a pattern. Searches through all subdirectories from the starting path. The search is case-sensitive and matches partial names. Returns full paths to all matching items. Great for finding files when you don't know their exact location. Only searches within allowed directories.
+   参数:
+     - path (必需): string - Directory path to start search.
+     - excludePatterns (可选): array - Patterns to exclude (optional).
+     - pattern (必需): string - Pattern to match.
+
+15. 工具名称: write_file
+   描述: Create a new file or write content to an existing file. You can choose to completely overwrite the file or append to the end by specifying the 'mode' parameter. Use 'overwrite' mode (default) to clear the file before writing, or 'append' mode to add content to the end of the file. Handles text content with proper encoding. Only works within allowed directories.
+   参数:
+     - mode (可选): string - Write mode: 'overwrite' to clear file, 'append' to add to end.
+     - path (必需): string - File path to write.
+     - content (必需): string - Content to write.
+
+16. 工具名称: browser_tab_new
+   描述: Open a new tab
+   参数:
+     - url (可选): string - The URL to navigate to in the new tab. If not provided, the new tab will be blank.
+
+17. 工具名称: browser_tab_select
+   描述: Select a tab by index
+   参数:
+     - index (必需): number - The index of the tab to select
+
+18. 工具名称: browser_tab_close
+   描述: Close a tab
+   参数:
+     - index (可选): number - The index of the tab to close. Closes current tab if not provided.
+
+19. 工具名称: browser_generate_playwright_test
+   描述: Generate a Playwright test for given scenario
+   参数:
+     - name (必需): string - The name of the test
+     - description (必需): string - The description of the test
+     - steps (必需): array - The steps of the test
+
+20. 工具名称: browser_wait_for
+   描述: Wait for text to appear or disappear or a specified time to pass
+   参数:
+     - text (可选): string - The text to wait for
+     - time (可选): number - The time to wait in seconds
+     - textGone (可选): string - The text to wait for to disappear
+
+21. 工具名称: browser_tab_list
+   描述: List browser tabs
+   参数:
+
+22. 工具名称: browser_network_requests
+   描述: Returns all network requests since loading the page
+   参数:
+
+23. 工具名称: browser_resize
+   描述: Resize the browser window
+   参数:
+     - width (必需): number - Width of the browser window
+     - height (必需): number - Height of the browser window
+
+24. 工具名称: browser_console_messages
+   描述: Returns all console messages
+   参数:
+
+25. 工具名称: browser_handle_dialog
+   描述: Handle a dialog
+   参数:
+     - promptText (可选): string - The text of the prompt in case of a prompt dialog.
+     - accept (必需): boolean - Whether to accept the dialog.
+
+26. 工具名称: browser_file_upload
+   描述: Upload one or multiple files
+   参数:
+     - paths (必需): array - The absolute paths to the files to upload. Can be a single file or multiple files.
+
+27. 工具名称: browser_install
+   描述: Install the browser specified in the config. Call this if you get an error about the browser not being installed.
+   参数:
+
+28. 工具名称: browser_press_key
+   描述: Press a key on the keyboard
+   参数:
+     - key (必需): string - Name of the key to press or a character to generate, such as `ArrowLeft` or `a`
+
+29. 工具名称: browser_navigate
+   描述: Navigate to a URL
+   参数:
+     - url (必需): string - The URL to navigate to
+
+30. 工具名称: browser_navigate_back
+   描述: Go back to the previous page
+   参数:
+
+31. 工具名称: browser_navigate_forward
+   描述: Go forward to the next page
+   参数:
+
+32. 工具名称: browser_close
+   描述: Close the page
+   参数:
+
+33. 工具名称: browser_pdf_save
+   描述: Save page as PDF
+   参数:
+     - filename (可选): string - File name to save the pdf to. Defaults to `page-{timestamp}.pdf` if not specified.
+
+34. 工具名称: browser_take_screenshot
+   描述: Take a screenshot of the current page. You can't perform actions based on the screenshot, use browser_snapshot for actions.
+   参数:
+     - ref (可选): string - Exact target element reference from the page snapshot. If not provided, the screenshot will be taken of viewport. If ref is provided, element must be provided too.
+     - filename (可选): string - File name to save the screenshot to. Defaults to `page-{timestamp}.{png|jpeg}` if not specified.
+     - raw (可选): boolean - Whether to return without compression (in PNG format). Default is false, which returns a JPEG image.
+     - element (可选): string - Human-readable element description used to obtain permission to screenshot the element. If not provided, the screenshot will be taken of viewport. If element is provided, ref must be provided too.
+
+35. 工具名称: browser_snapshot
+   描述: Capture accessibility snapshot of the current page, this is better than screenshot
+   参数:
+
+36. 工具名称: browser_click
+   描述: Perform click on a web page
+   参数:
+     - ref (必需): string - Exact target element reference from the page snapshot
+     - element (必需): string - Human-readable element description used to obtain permission to interact with the element
+
+37. 工具名称: browser_drag
+   描述: Perform drag and drop between two elements
+   参数:
+     - endElement (必需): string - Human-readable target element description used to obtain the permission to interact with the element
+     - startElement (必需): string - Human-readable source element description used to obtain the permission to interact with the element
+     - startRef (必需): string - Exact source element reference from the page snapshot
+     - endRef (必需): string - Exact target element reference from the page snapshot
+
+38. 工具名称: browser_hover
+   描述: Hover over element on page
+   参数:
+     - ref (必需): string - Exact target element reference from the page snapshot
+     - element (必需): string - Human-readable element description used to obtain permission to interact with the element
+
+39. 工具名称: browser_type
+   描述: Type text into editable element
+   参数:
+     - ref (必需): string - Exact target element reference from the page snapshot
+     - submit (可选): boolean - Whether to submit entered text (press Enter after)
+     - text (必需): string - Text to type into the element
+     - slowly (可选): boolean - Whether to type one character at a time. Useful for triggering key handlers in the page. By default entire text is filled in at once.
+     - element (必需): string - Human-readable element description used to obtain permission to interact with the element
+
+40. 工具名称: browser_select_option
+   描述: Select an option in a dropdown
+   参数:
+     - ref (必需): string - Exact target element reference from the page snapshot
+     - values (必需): array - Array of values to select in the dropdown. This can be a single value or multiple values.
+     - element (必需): string - Human-readable element description used to obtain permission to interact with the element
+
+41. 工具名称: shell
+   描述: Executes an shell command with timeout and returns the output or an error on linux platform.
+   参数:
+     - timeout_ms (必需): integer - Command execution timeout (unit: milliseconds). If not specified, the default value (such as 1000 milliseconds) is used
+     - command (必需): string - client input command
+2025-08-09 13:04:23,650 - INFO - 找到 1 个资源
+
+📁 找到 1 个可用资源:
+   - wuying mcp runtime URL: https://wuying.aliyun.com
+
+🔧 演示调用第一个工具: get_resource
+⚠️  跳过工具调用 - 无法构造测试参数

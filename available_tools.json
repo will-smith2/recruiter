@@ -1,0 +1,47 @@
+[
+  {
+    "tool_name": "search_jobs",
+    "description": "在指定的招聘网站上搜索工作机会。",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "keywords": {
+          "type": "string",
+          "description": "搜索关键词，例如 '软件工程师', '产品经理'。"
+        },
+        "city": {
+          "type": "string",
+          "description": "目标工作城市，例如 '上海', '北京'。"
+        },
+        "source": {
+          "type": "string",
+          "description": "招聘网站来源，例如 'LinkedIn', 'Boss直聘'。"
+        }
+      },
+      "required": ["keywords", "city"]
+    }
+  },
+  {
+    "tool_name": "get_user_profile",
+    "description": "获取存储的用户个人资料和偏好信息。",
+    "parameters": {}
+  },
+  {
+    "tool_name": "update_user_profile",
+    "description": "更新用户的个人资料或偏好信息。",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "要更新的字段名，例如 'preferred_cities'。"
+        },
+        "value": {
+          "type": "string",
+          "description": "要更新的新值。"
+        }
+      },
+      "required": ["field", "value"]
+    }
+  }
+]
